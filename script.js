@@ -1,19 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
     const video = document.getElementById('bg-video');
-    const cards = document.querySelectorAll('.glass-card');
 
     // 1. MOBILE AUTOPLAY FIX
-    // Sometimes mobile browsers pause video if "Low Power Mode" is on.
-    // This force-starts it the moment the user touches the screen.
+    // Forces video to play on first user interaction to bypass browser restrictions
     const forcePlay = () => {
-        video.play();
-        document.removeEventListener('touchstart', forcePlay);
+        if (video) {
+            video.play().catch(error => console.log("Video play failed:", error));
+            document.removeEventListener('touchstart', forcePlay);
+        }
     };
     document.addEventListener('touchstart', forcePlay);
 
-
     // 2. TEXT SCRAMBLE EFFECT
-    // Makes your "SYSTEM_ONLINE" header look like it's decrypting.
     const scrambleText = (element) => {
         const originalText = element.innerText;
         const chars = "ABCDEF0123456789<>/-_";
@@ -28,26 +26,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
                 .join("");
             
-            if(iteration >= originalText.length) clearInterval(interval);
+            if(iteration >= originalText.length) {
+                clearInterval(interval);
+            }
             iteration += 1 / 3;
-        }, 30;
+        }, 30); // Parenthesis fixed here
     };
 
     const header = document.querySelector('.glitch');
-    scrambleText(header);
+    if (header) scrambleText(header);
 
-
-    // 3. GYRO-PARALLAX (Optional - Tilt Effect)
-    // If you're on a phone, tilting the phone moves the cards slightly.
+    // 3. GYRO-PARALLAX
     window.addEventListener('deviceorientation', (event) => {
-        const x = event.beta;  // Forward/Back tilt
-        const y = event.gamma; // Left/Right tilt
+        const x = event.beta; 
+        const y = event.gamma; 
 
-        // Gently shift the link container based on tilt
         const moveX = y / 2; 
-        const moveY = (x - 45) / 2; // Adjusting for natural holding angle
+        const moveY = (x - 45) / 2; 
 
-        document.querySelector('.link-grid').style.transform = 
-            `translate(${moveX}px, ${moveY}px)`;
+        const grid = document.querySelector('.link-grid');
+        if (grid) {
+            grid.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        }
     });
 });
