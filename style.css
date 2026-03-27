@@ -1,8 +1,7 @@
-/* --- VARIABLES & RESET --- */
 :root {
-    --gold: #d4af37;        /* Classic Metallic Gold */
+    --gold: #d4af37;
     --gold-glow: rgba(212, 175, 55, 0.4);
-    --dark: #000000;        /* Deep Obsidian Black */
+    --dark: #000000;
     --glass: rgba(255, 255, 255, 0.03); 
 }
 
@@ -15,29 +14,27 @@
 body, html {
     width: 100%;
     height: 100%;
-    overflow-x: hidden; /* Prevents side-scrolling on mobile */
+    overflow-x: hidden;
     background-color: var(--dark);
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     color: var(--gold);
 }
 
-/* --- VIDEO BACKGROUND --- */
 .video-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1; /* Sits behind everything */
+    z-index: -1;
 }
 
 #bg-video {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures video fills screen without stretching */
+    object-fit: cover;
 }
 
-/* Darkens the video slightly so text pops */
 .overlay {
     position: absolute;
     top: 0;
@@ -47,7 +44,6 @@ body, html {
     background: radial-gradient(circle, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%);
 }
 
-/* --- MAIN CONTENT LAYOUT --- */
 .content {
     display: flex;
     flex-direction: column;
@@ -55,37 +51,31 @@ body, html {
     justify-content: center;
     min-height: 100vh;
     padding: 40px 20px;
-    text-align: center;
-}
-
-header {
-    margin-bottom: 40px;
 }
 
 h1.glitch {
     font-size: 1.8rem;
-    font-weight: 800;
     letter-spacing: 5px;
     text-transform: uppercase;
     text-shadow: 0 0 15px var(--gold-glow);
+    margin-bottom: 40px;
 }
 
-/* --- LINK GRID & GLASS CARDS --- */
 .link-grid {
     width: 100%;
-    max-width: 380px; /* Perfect width for mobile screens */
+    max-width: 380px;
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Space between buttons */
+    gap: 15px;
+    transition: transform 0.1s ease-out; /* Smooths out the gyro movement */
 }
 
 .glass-card {
     display: block;
-    width: 100%;
     padding: 18px;
     background: var(--glass);
-    backdrop-filter: blur(12px); /* The 'Frosted Glass' look */
-    -webkit-backdrop-filter: blur(12px); /* Safari support */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(212, 175, 55, 0.2);
     border-radius: 10px;
     text-decoration: none;
@@ -94,20 +84,12 @@ h1.glitch {
     font-weight: 600;
     letter-spacing: 2px;
     transition: all 0.3s ease;
-    cursor: pointer;
-    outline: none;
+    text-align: center;
 }
 
-/* Interaction Effects */
 .glass-card:hover, .glass-card:active {
     background: rgba(212, 175, 55, 0.1);
     border-color: var(--gold);
     box-shadow: 0 0 20px var(--gold-glow);
     transform: translateY(-2px);
-}
-
-/* Custom Discord Button style (Button vs Link reset) */
-button.glass-card {
-    font-family: inherit;
-    text-transform: uppercase;
 }
