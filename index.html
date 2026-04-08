@@ -8,11 +8,21 @@
 </head>
 <body>
     <div class="video-container">
-        <video autoplay muted loop playsinline poster="assets/poster.jpg" id="bg-video">
-            <source src="https://files.catbox.moe/fywsnp.mp4" type="video/mp4">
-        </video>
-        <div class="overlay"></div>
-    </div>
+    <video 
+        autoplay 
+        muted 
+        loop 
+        playsinline 
+        preload="metadata"
+        poster="assets/poster.jpg" 
+        id="bg-video">
+        <source src="https://files.catbox.moe/fywsnp.mp4" type="video/mp4">
+        <!-- Extra fallback in case Catbox acts up -->
+        <source src="https://files.catbox.moe/fywsnp.mp4" type="video/webm">
+        Your browser doesn't support background video.
+    </video>
+    <div class="overlay"></div>
+</div>
 
     <main class="content">
         <header>
